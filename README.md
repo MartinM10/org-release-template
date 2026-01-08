@@ -1,0 +1,105 @@
+# 🚀 Organization Release Template
+
+Template repository con CI/CD completo, Conventional Commits y releases automáticas para la organización.
+
+## ✨ Características
+
+- 🔄 **CI/CD con GitHub Actions** - Lint, build y test automáticos
+- 📝 **Conventional Commits** - Formato estándar de commits
+- 🏷️ **Releases automáticas** - Con release-please de Google
+- 📋 **CHANGELOG automático** - Generado desde los commits
+- 🔒 **Protección de ramas** - Guía incluida
+
+## 📁 Estructura
+
+```
+├── .github/
+│   ├── workflows/          # GitHub Actions
+│   │   ├── ci.yml          # CI: lint, build, test
+│   │   ├── release-please.yml
+│   │   └── pr-check.yml
+│   ├── release-please-config.json
+│   └── PULL_REQUEST_TEMPLATE.md
+├── .husky/                 # Git hooks
+├── docs/                   # Documentación
+│   ├── BRANCH_PROTECTION.md
+│   ├── CONVENTIONAL_COMMITS.md
+│   └── RELEASE_WORKFLOW.md
+├── src/                    # Código fuente
+├── .commitlintrc.json      # Config commitlint
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+└── package.json
+```
+
+## 🚦 Inicio Rápido
+
+### 1. Usar este Template
+
+Haz clic en **"Use this template"** → **"Create a new repository"**
+
+### 2. Clonar e Instalar
+
+```bash
+git clone https://github.com/tu-org/tu-repo.git
+cd tu-repo
+npm install
+```
+
+### 3. Proteger la Rama Main
+
+Sigue la guía en [docs/BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md)
+
+### 4. ¡Empieza a Desarrollar!
+
+```bash
+# Crear branch
+git checkout -b feature/mi-feature
+
+# Hacer cambios y commit (formato convencional)
+git commit -m "feat: add awesome feature"
+
+# Crear PR
+git push origin feature/mi-feature
+```
+
+## 📖 Documentación
+
+| Documento | Descripción |
+|-----------|-------------|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Guía de contribución |
+| [Conventional Commits](docs/CONVENTIONAL_COMMITS.md) | Formato de commits |
+| [Branch Protection](docs/BRANCH_PROTECTION.md) | Cómo proteger main |
+| [Release Workflow](docs/RELEASE_WORKFLOW.md) | Flujo de releases |
+
+## 🔧 Scripts Disponibles
+
+```bash
+npm run lint      # Ejecutar ESLint
+npm run lint:fix  # Corregir errores de lint
+npm run test      # Ejecutar tests
+npm run build     # Build del proyecto
+```
+
+## 📋 Flujo de Trabajo
+
+```
+1. Crea branch desde main
+2. Haz commits con formato convencional
+3. Crea PR → CI corre automáticamente
+4. Obtén aprobación → Merge
+5. release-please crea Release PR
+6. Merge Release PR → Nueva versión publicada
+```
+
+## 🏷️ Versionado
+
+Usamos [SemVer](https://semver.org/):
+
+- `fix:` → PATCH (1.0.X)
+- `feat:` → MINOR (1.X.0)
+- `BREAKING CHANGE` → MAJOR (X.0.0)
+
+## 📄 Licencia
+
+[MIT](LICENSE)
