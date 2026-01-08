@@ -23,9 +23,6 @@ source .venv/bin/activate  # Linux/Mac
 # Instalar dependencias de desarrollo
 pip install -e ".[dev]"
 
-# Instalar pre-commit hooks
-pre-commit install
-pre-commit install --hook-type commit-msg
 
 # Verificar que todo funciona
 ruff check src/

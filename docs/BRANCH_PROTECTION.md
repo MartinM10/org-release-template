@@ -30,7 +30,7 @@ Obliga a que todos los cambios pasen por un Pull Request.
 Asegura que el CI pase antes de poder mergear.
 
 - **Require branches to be up to date before merging**: Activado
-- Busca y añade status checks, estos son algunos de ejemplo:
+- Busca y añade status checks, *estos son algunos de ejemplo*:
   - `Lint`
   - `Build`
   - `Test`

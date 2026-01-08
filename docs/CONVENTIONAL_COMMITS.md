@@ -80,7 +80,7 @@ feat: add user authentication system with JWT tokens and refresh token rotation 
 
 ## Resultado en CHANGELOG
 
-Cuando usas los tipos correctamente, el CHANGELOG se genera así:
+Cuando usas los tipos correctamente, el `CHANGELOG` puede generarse y mantenerse automáticamente usando github actions como `.github/workflows/release-please.yml`, que tras ejecutarlo el `CHANGELOG` se debería ver así:
 
 ```markdown
 ## [1.2.0] - 2026-01-15
@@ -97,23 +97,16 @@ Cuando usas los tipos correctamente, el CHANGELOG se genera así:
 - Improve database query performance (#20)
 ```
 
-## Tips
+> [!TIP]
+> 1. **Descripción clara** - Describe qué hace el cambio
+> 2. **Sin punto final** - No termines la descripción con punto
+> 3. **Modo imperativo** - "add feature" no "added feature"
+> 4. **Sé específico** - "fix login button" mejor que "fix bug"
+> 5. **Un cambio por commit** - Facilita el rollback
 
-1. **Descripción clara** - Describe qué hace el cambio
-2. **Sin punto final** - No termines la descripción con punto
-3. **Modo imperativo** - "add feature" no "added feature"
-4. **Sé específico** - "fix login button" mejor que "fix bug"
-5. **Un cambio por commit** - Facilita el rollback
+## Validación
 
-## Validación Local
-
-El proyecto usa `pre-commit` con `conventional-pre-commit` para validar commits:
-
-```bash
-# Instalar hooks
-pre-commit install
-pre-commit install --hook-type commit-msg
-```
+Se recomienda revisar tus mensajes de commit antes de enviarlos para asegurar el cumplimiento.
 
 Si tu commit es rechazado, verás un error indicando el problema.
 

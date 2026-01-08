@@ -1,10 +1,12 @@
 # Arquitectura del Proyecto
 
-Todo proyecto debe tener un archivo `ARCHITECTURE.md` (o una carpeta `docs/architecture/`) que explique cómo funciona el sistema internamente.
+Todo proyecto debe tener un archivo `ARCHITECTURE.md` que podría estar en la raíz del proyecto o en una carpeta `docs/architecture/` que explique cómo funciona el sistema internamente, qué componentes tiene, y cómo se comunican entre ellos.
 
 ## ¿Qué incluir?
 
-Se recomienda encarecidamente el uso de diagramas **Mermaid** para ilustrar los conceptos.
+`Se recomienda` el uso de diagramas, ya sean ficheros .png o .svg, o diagramas **Mermaid** para ilustrar los conceptos y que sean fáciles de entender.
+> [!NOTE]
+> A continuación se muestran algunos ejemplos de diagramas mermaid que puedes usar:
 
 ### 1. Diagrama de Contexto (C4 Nivel 1)
 Muestra cómo el sistema interactúa con usuarios y otros sistemas externos.
@@ -56,23 +58,28 @@ sequenceDiagram
 Puedes copiar el siguiente contenido a tu `ARCHITECTURE.md`:
 
 ```markdown
-# Arquitectura del Proyecto
+# Project Architecture
 
-## Visión General
+## Overview
 Descripción de alto nivel...
 
-## Diagrama de Componentes
+Podrías explicar el propósito del proyecto, las principales funcionalidades y cómo se relacionan entre sí.
+
+## Components Diagram
 (Insertar diagrama Mermaid aquí)
 
-## Tecnologías
+Podrías explicar los componentes principales del sistema y cómo se relacionan entre sí.
+
+## Technologies
+Podrías listar las tecnologías principales que se usan en el proyecto.
+
 - Backend: ...
 - Frontend: ...
 - Base de Datos: ...
 
-## Flujos de Datos Clave
-Explicación de cómo viaja la información...
+## Design Decisions
+Podrías explicar las decisiones de diseño que se tomaron para el proyecto.
 
-## Decisiones de Diseño (ADRs)
-- Decisión 1: ...
-- Decisión 2: ...
+- Decision 1: ...
+- Decision 2: ...
 ```
