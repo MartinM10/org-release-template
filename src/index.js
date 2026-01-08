@@ -25,4 +25,40 @@ function add(a, b) {
   return a + b
 }
 
-module.exports = { greet, add }
+/**
+ * Multiplies two numbers
+ * @param {number} a - First number
+ * @param {number} b - Second number
+ * @returns {number} The product of a and b
+ */
+function multiply(a, b) {
+  return a * b
+}
+
+/**
+ * Divides two numbers
+ * @param {number} a - Dividend
+ * @param {number} b - Divisor
+ * @returns {number} The quotient of a and b
+ * @throws {Error} When divisor is zero
+ */
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot divide by zero')
+  }
+  return a / b
+}
+
+/**
+ * Formats a semantic version string
+ * @param {number} major - Major version
+ * @param {number} minor - Minor version
+ * @param {number} patch - Patch version
+ * @returns {string} Formatted version string
+ */
+function formatVersion(major, minor, patch) {
+  return `v${major}.${minor}.${patch}`
+}
+
+module.exports = { greet, add, multiply, divide, formatVersion }
+
