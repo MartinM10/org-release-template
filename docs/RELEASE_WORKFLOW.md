@@ -28,7 +28,7 @@ Si hay commits relevantes (`feat`, `fix`, etc.), release-please crea o actualiza
 
 - 📝 Actualiza `CHANGELOG.md` automáticamente
 - 🔢 Calcula la nueva versión según SemVer
-- 📦 Actualiza `version` en `package.json`
+- 📦 Actualiza `version` en `pyproject.toml`
 
 ### 4. Merge del Release PR
 
