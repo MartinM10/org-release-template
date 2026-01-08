@@ -117,7 +117,7 @@ Antes de solicitar revisión:
 ## 🆘 ¿Necesitas Ayuda?
 
 - Revisa la [documentación](docs/)
-- Pregunta en el canal de Slack del equipo
+- Pregunta en el canal de Discord del equipo
 - Menciona a un maintainer en tu PR
 
 ## 📜 Código de Conducta
