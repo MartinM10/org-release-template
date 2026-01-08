@@ -12,7 +12,7 @@ graph TD
     Repo --> Github[.github/]
     Repo --> Source[src/ o app/]
     Repo --> Tests[tests/]
-    Repo --> Config files
+    Repo --> Config-files
     
     Github --> Workflows[workflows/release-please.yml]
     Github --> Config[release-please-config.json]
