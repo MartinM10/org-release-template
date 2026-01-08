@@ -31,6 +31,9 @@ Proveer los estándares comunes a todos los desarrollos:
 2. **Documentación Obligatoria**: Requerimientos organizacionales.
 3. **Flujo de Versionado**: SemVer y Conventional Commits.
 
+> [!IMPORTANT]
+> El uso de **Conventional Commits** es CRÍTICO. Sin él, el CHANGELOG no se generará automáticamente y se perderá la trazabilidad. Ver [Guía de Commits](docs/CONVENTIONAL_COMMITS.md).
+
 ## 📋 Requisitos de la Organización
 
 👉 **[Leer Requerimientos Organizacionales (KPIs)](docs/ORGANIZATION_REQUIREMENTS.md)**
@@ -52,7 +55,7 @@ Resumen:
    - `docs/` (especialmente `ORGANIZATION_REQUIREMENTS.md`)
 
 3. **Crea tu `ARCHITECTURE.md`**:
-   Usa la [plantilla de arquitectura](docs/ARCHITECTURE_TEMPLATE.md) para documentar tu sistema con diagramas Mermaid.
+   Usa la guía [ARCHITECTURE.md](docs/ARCHITECTURE.md) para documentar tu sistema con diagramas Mermaid.
 
 4. **Desarrolla tu aplicación**:
    Crea tus fuentes y tests según el lenguaje elegido.
@@ -60,7 +63,7 @@ Resumen:
 ## 📄 Documentación Incluida
 
 - [Requerimientos Organizacionales](docs/ORGANIZATION_REQUIREMENTS.md)
-- [Plantilla de Arquitectura](docs/ARCHITECTURE_TEMPLATE.md)
+- [Arquitectura (Ejemplo)](docs/ARCHITECTURE.md)
 - [Flujo de Release](docs/RELEASE_WORKFLOW.md)
 - [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)
 

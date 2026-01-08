@@ -53,7 +53,10 @@ Usando la configuración incluida en este template (`.github/workflows/release-p
 Solo necesitas seguir [Conventional Commits](CONVENTIONAL_COMMITS.md).
 
 ### Opción B: Manual
-Si decides no usar automatización, debes editar `CHANGELOG.md` manualmente antes de cada release, siguiendo estrictamente el formato [Keep a Changelog](https://keepachangelog.com/).
+Si decides no usar automatización, debes editar `CHANGELOG.md` manualmente.
+
+> [!TIP]
+> Incluso si mantienes el changelog manualmente, **se recomienda fuertemente usar Conventional Commits**. Esto mantiene el historial limpio, facilita la trazabilidad y permite automatizar en el futuro si cambias de opinión.
 
 ## Referencias
 

@@ -56,7 +56,11 @@ Escribe código limpio siguiendo las guías de estilo del proyecto (PEP 8, ruff)
 
 ### 3. Commits
 
-**Formato obligatorio: [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)**
+> [!IMPORTANT]
+> **El uso de [Conventional Commits](docs/CONVENTIONAL_COMMITS.md) es OBLIGATORIO.**
+> Es la base para mantener el CHANGELOG automatizado y la trazabilidad del proyecto. Intenta usarlo siempre, incluso si mantienes el changelog manualmente.
+
+**Formato obligatorio:**
 
 ```bash
 # Estructura

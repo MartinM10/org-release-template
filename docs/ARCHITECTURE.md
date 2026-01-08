@@ -1,4 +1,4 @@
-# Documentación de Arquitectura
+# Arquitectura del Proyecto
 
 Todo proyecto debe tener un archivo `ARCHITECTURE.md` (o una carpeta `docs/architecture/`) que explique cómo funciona el sistema internamente.
 
