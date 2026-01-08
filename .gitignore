@@ -1,32 +1,84 @@
-# Dependencies
-node_modules/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Build output
-dist/
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Coverage
-coverage/
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
 
-# Logs
-*.log
-npm-debug.log*
+# PyInstaller
+*.manifest
+*.spec
 
-# OS files
-.DS_Store
-Thumbs.db
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Environment
 .env
 .env.local
 .env.*.local
 
-# Package manager locks (keep only one)
-# yarn.lock
-# pnpm-lock.yaml
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/

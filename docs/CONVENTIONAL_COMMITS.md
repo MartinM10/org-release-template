@@ -19,31 +19,34 @@ Esta guía explica el formato de commits que usamos en la organización.
 [footer(s) opcional]
 ```
 
-## Tipos de Commits
+## Tipos de Commits y Mapeo a CHANGELOG
 
-| Tipo | Descripción | Bump SemVer |
-|------|-------------|-------------|
-| `feat` | Nueva funcionalidad | MINOR (0.X.0) |
-| `fix` | Corrección de bug | PATCH (0.0.X) |
-| `docs` | Solo documentación | - |
-| `style` | Formato (espacios, comas, etc.) | - |
-| `refactor` | Cambio de código sin feat ni fix | - |
-| `perf` | Mejora de rendimiento | PATCH |
-| `test` | Añadir o corregir tests | - |
-| `build` | Cambios en build o dependencias | - |
-| `ci` | Cambios en CI/CD | - |
-| `chore` | Tareas de mantenimiento | - |
-| `revert` | Revierte un commit anterior | - |
+Usamos el estándar [Keep a Changelog](https://keepachangelog.com/) para el CHANGELOG:
+
+| Tipo | Sección CHANGELOG | Bump SemVer | Descripción |
+|------|-------------------|-------------|-------------|
+| `feat` | **Added** | MINOR (0.X.0) | Nueva funcionalidad |
+| `fix` | **Fixed** | PATCH (0.0.X) | Corrección de bug |
+| `perf` | **Changed** | PATCH | Mejora de rendimiento |
+| `refactor` | **Changed** | - | Cambio de código sin feat ni fix |
+| `docs` | **Changed** | - | Solo documentación |
+| `style` | (oculto) | - | Formato (espacios, comas, etc.) |
+| `test` | (oculto) | - | Añadir o corregir tests |
+| `build` | (oculto) | - | Cambios en build o dependencias |
+| `ci` | (oculto) | - | Cambios en CI/CD |
+| `chore` | (oculto) | - | Tareas de mantenimiento |
+| `revert` | **Changed** | - | Revierte un commit anterior |
+| `BREAKING CHANGE` | **⚠ BREAKING** | MAJOR (X.0.0) | Cambio incompatible |
 
 ## Ejemplos
 
 ### ✅ Commits Correctos
 
 ```bash
-# Nueva funcionalidad
+# Nueva funcionalidad → Sección "Added"
 feat: add user authentication system
 
-# Corrección de bug
+# Corrección de bug → Sección "Fixed"
 fix: resolve login timeout issue
 
 # Con ámbito
@@ -55,7 +58,7 @@ fix: prevent race condition in data sync
 Multiple users reported data loss when syncing simultaneously.
 This fix adds a mutex lock to prevent concurrent writes.
 
-# Breaking change
+# Breaking change → Sección "BREAKING CHANGES"
 feat!: remove deprecated API endpoints
 
 BREAKING CHANGE: The /v1/users endpoint has been removed.
@@ -71,30 +74,32 @@ added new feature
 # Tipo en mayúsculas
 FEAT: add login
 
-# Descripción en mayúsculas
-feat: Add Login Feature
-
 # Descripción muy larga (usa el cuerpo)
 feat: add user authentication system with JWT tokens and refresh token rotation including password reset functionality
 ```
 
-## Breaking Changes
+## Resultado en CHANGELOG
 
-Para indicar un cambio incompatible (MAJOR):
+Cuando usas los tipos correctamente, el CHANGELOG se genera así:
 
-```bash
-# Opción 1: Usar "!" después del tipo
-feat!: change authentication flow
+```markdown
+## [1.2.0] - 2026-01-15
 
-# Opción 2: Usar footer
-feat: change authentication flow
+### Added
+- Add user authentication system (#15)
+- Implement dark mode support (#18)
 
-BREAKING CHANGE: API tokens now expire after 24 hours.
+### Fixed
+- Resolve memory leak in dashboard (#16)
+- Fix login button not responding (#17)
+
+### Changed
+- Improve database query performance (#20)
 ```
 
 ## Tips
 
-1. **Descripción en minúsculas** - Empieza siempre en minúscula
+1. **Descripción clara** - Describe qué hace el cambio
 2. **Sin punto final** - No termines la descripción con punto
 3. **Modo imperativo** - "add feature" no "added feature"
 4. **Sé específico** - "fix login button" mejor que "fix bug"
@@ -102,15 +107,15 @@ BREAKING CHANGE: API tokens now expire after 24 hours.
 
 ## Validación Local
 
-El proyecto usa `commitlint` + `husky` para validar commits localmente.
+El proyecto usa `pre-commit` con `conventional-pre-commit` para validar commits:
 
-Si tu commit es rechazado, verás un error como:
+```bash
+# Instalar hooks
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
 
-```
-⧗   input: Added new feature
-✖   subject may not be empty [subject-empty]
-✖   type may not be empty [type-empty]
-```
+Si tu commit es rechazado, verás un error indicando el problema.
 
 ## Títulos de Pull Request
 
@@ -125,4 +130,5 @@ docs: update API documentation
 ## Referencias
 
 - [Conventional Commits Specification](https://www.conventionalcommits.org/)
+- [Keep a Changelog](https://keepachangelog.com/)
 - [Semantic Versioning](https://semver.org/)

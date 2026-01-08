@@ -6,21 +6,30 @@
 
 1. Lee la documentación en [/docs](docs/)
 2. Familiarízate con [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)
-3. Asegúrate de tener Node.js 20+ instalado
+3. Asegúrate de tener Python 3.10+ instalado
 
 ## 🔧 Setup del Entorno
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/org/repo.git
+git clone https://github.com/KhaosResearch/repo.git
 cd repo
 
-# Instalar dependencias
-npm install
+# Crear entorno virtual
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate   # Windows
+
+# Instalar dependencias de desarrollo
+pip install -e ".[dev]"
+
+# Instalar pre-commit hooks
+pre-commit install
+pre-commit install --hook-type commit-msg
 
 # Verificar que todo funciona
-npm run lint
-npm test
+ruff check src/
+pytest tests/ -v
 ```
 
 ## 🌿 Flujo de Trabajo (Git Flow)
@@ -43,7 +52,7 @@ git checkout -b tipo/descripcion
 
 ### 2. Hacer Cambios
 
-Escribe código limpio siguiendo las guías de estilo del proyecto.
+Escribe código limpio siguiendo las guías de estilo del proyecto (PEP 8, ruff).
 
 ### 3. Commits
 
@@ -59,19 +68,19 @@ git commit -m "fix(api): resolve timeout in login endpoint"
 git commit -m "docs: update installation guide"
 ```
 
-**Tipos válidos:**
-| Tipo | Uso |
-|------|-----|
-| `feat` | Nueva funcionalidad |
-| `fix` | Corrección de bug |
-| `docs` | Documentación |
-| `style` | Formato (sin cambio lógico) |
-| `refactor` | Reestructurar código |
-| `perf` | Mejora de rendimiento |
-| `test` | Tests |
-| `build` | Build/dependencias |
-| `ci` | CI/CD |
-| `chore` | Mantenimiento |
+**Tipos válidos y su mapeo a CHANGELOG:**
+
+| Tipo | Sección CHANGELOG | Uso |
+|------|-------------------|-----|
+| `feat` | **Added** | Nueva funcionalidad |
+| `fix` | **Fixed** | Corrección de bug |
+| `docs` | **Changed** | Documentación |
+| `refactor` | **Changed** | Reestructurar código |
+| `perf` | **Changed** | Mejora de rendimiento |
+| `test` | (oculto) | Tests |
+| `build` | (oculto) | Build/dependencias |
+| `ci` | (oculto) | CI/CD |
+| `chore` | (oculto) | Mantenimiento |
 
 ### 4. Crear Pull Request
 
@@ -99,10 +108,10 @@ Una vez aprobado y con CI verde, tu PR será mergeado.
 
 Antes de solicitar revisión:
 
-- [ ] Mi código sigue las guías de estilo
+- [ ] Mi código sigue las guías de estilo (ruff pasa)
 - [ ] He añadido tests (si aplica)
-- [ ] Los tests pasan localmente (`npm test`)
-- [ ] El lint pasa (`npm run lint`)
+- [ ] Los tests pasan localmente (`pytest tests/`)
+- [ ] El lint pasa (`ruff check src/`)
 - [ ] He actualizado la documentación (si aplica)
 - [ ] El título del PR sigue Conventional Commits
 
@@ -117,7 +126,7 @@ Antes de solicitar revisión:
 ## 🆘 ¿Necesitas Ayuda?
 
 - Revisa la [documentación](docs/)
-- Pregunta en el canal de Discord del equipo
+- Pregunta en el canal de Slack del equipo
 - Menciona a un maintainer en tu PR
 
 ## 📜 Código de Conducta

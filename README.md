@@ -4,32 +4,34 @@ Template repository con CI/CD completo, Conventional Commits y releases automát
 
 ## ✨ Características
 
-- 🔄 **CI/CD con GitHub Actions** - Lint, build y test automáticos
+- 🔄 **CI/CD con GitHub Actions** - Lint, test automáticos
 - 📝 **Conventional Commits** - Formato estándar de commits
 - 🏷️ **Releases automáticas** - Con release-please de Google
-- 📋 **CHANGELOG automático** - Generado desde los commits
+- 📋 **CHANGELOG automático** - Formato [Keep a Changelog](https://keepachangelog.com/)
 - 🔒 **Protección de ramas** - Guía incluida
 
 ## 📁 Estructura
 
 ```
 ├── .github/
-│   ├── workflows/          # GitHub Actions
-│   │   ├── ci.yml          # CI: lint, build, test
+│   ├── workflows/
+│   │   ├── ci.yml              # CI: lint, test
 │   │   ├── release-please.yml
 │   │   └── pr-check.yml
 │   ├── release-please-config.json
 │   └── PULL_REQUEST_TEMPLATE.md
-├── .husky/                 # Git hooks
-├── docs/                   # Documentación
+├── docs/                       # Documentación
 │   ├── BRANCH_PROTECTION.md
 │   ├── CONVENTIONAL_COMMITS.md
 │   └── RELEASE_WORKFLOW.md
-├── src/                    # Código fuente
-├── .commitlintrc.json      # Config commitlint
+├── src/                        # Código fuente
+│   └── utils.py
+├── tests/                      # Tests
+├── .pre-commit-config.yaml     # Pre-commit hooks
+├── pyproject.toml              # Config del proyecto
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
-└── package.json
+└── README.md
 ```
 
 ## 🚦 Inicio Rápido
@@ -43,7 +45,18 @@ Haz clic en **"Use this template"** → **"Create a new repository"**
 ```bash
 git clone https://github.com/tu-org/tu-repo.git
 cd tu-repo
-npm install
+
+# Crear entorno virtual
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate   # Windows
+
+# Instalar dependencias
+pip install -e ".[dev]"
+
+# Instalar pre-commit hooks
+pre-commit install
+pre-commit install --hook-type commit-msg
 ```
 
 ### 3. Proteger la Rama Main
@@ -72,13 +85,20 @@ git push origin feature/mi-feature
 | [Branch Protection](docs/BRANCH_PROTECTION.md) | Cómo proteger main |
 | [Release Workflow](docs/RELEASE_WORKFLOW.md) | Flujo de releases |
 
-## 🔧 Scripts Disponibles
+## 🔧 Comandos Útiles
 
 ```bash
-npm run lint      # Ejecutar ESLint
-npm run lint:fix  # Corregir errores de lint
-npm run test      # Ejecutar tests
-npm run build     # Build del proyecto
+# Lint
+ruff check src/
+
+# Formatear
+ruff format src/
+
+# Tests
+pytest tests/ -v
+
+# Pre-commit en todos los archivos
+pre-commit run --all-files
 ```
 
 ## 📋 Flujo de Trabajo
@@ -94,11 +114,14 @@ npm run build     # Build del proyecto
 
 ## 🏷️ Versionado
 
-Usamos [SemVer](https://semver.org/):
+Usamos [SemVer](https://semver.org/) con formato [Keep a Changelog](https://keepachangelog.com/):
 
-- `fix:` → PATCH (1.0.X)
-- `feat:` → MINOR (1.X.0)
-- `BREAKING CHANGE` → MAJOR (X.0.0)
+| Tipo de Commit | Sección CHANGELOG | Versión |
+|----------------|-------------------|---------|
+| `feat:` | **Added** | MINOR (0.X.0) |
+| `fix:` | **Fixed** | PATCH (0.0.X) |
+| `refactor:`, `perf:` | **Changed** | - |
+| `BREAKING CHANGE` | **⚠ BREAKING** | MAJOR (X.0.0) |
 
 ## 📄 Licencia
 
