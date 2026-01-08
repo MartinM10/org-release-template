@@ -22,7 +22,6 @@
 - [ ] He realizado una auto-revisión de mi código
 - [ ] He comentado mi código, especialmente en áreas difíciles de entender
 - [ ] He actualizado la documentación si es necesario
-- [ ] Mis cambios no generan nuevos warnings
 - [ ] He añadido tests que prueban que mi fix/feature funciona
 - [ ] Los tests existentes pasan localmente
 

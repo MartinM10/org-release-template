@@ -104,12 +104,6 @@ Cuando usas los tipos correctamente, el `CHANGELOG` puede generarse y mantenerse
 > 4. **Sé específico** - "fix login button" mejor que "fix bug"
 > 5. **Un cambio por commit** - Facilita el rollback
 
-## Validación
-
-Se recomienda revisar tus mensajes de commit antes de enviarlos para asegurar el cumplimiento.
-
-Si tu commit es rechazado, verás un error indicando el problema.
-
 ## Títulos de Pull Request
 
 Los títulos de PR **también deben seguir este formato**, ya que se usan para generar el CHANGELOG.
@@ -119,6 +113,23 @@ feat: add dark mode support
 fix: resolve memory leak in dashboard
 docs: update API documentation
 ```
+
+## Validación de commits
+
+Se recomienda revisar tus mensajes de commit antes de enviarlos para asegurar el cumplimiento.
+
+Además se puede usar `pre-commit` para validar tus commits localmente:
+
+```bash
+pre-commit run --hook-type commit-msg
+```
+
+Si tu commit es rechazado, verás un error indicando el problema.
+
+> [!NOTE]
+> Te dejo documentación de `pre-commit` y un artículo que te puede ayudar a entender mejor el uso de `pre-commit` para que puedas ver más opciones y configuraciones: 
+> - [Pre-commit](https://pre-commit.com/)
+> - [Mejorando nuestro código con pre-commit](https://blog.damavis.com/mejorando-nuestro-codigo-con-pre-commit/)
 
 ## Referencias
 

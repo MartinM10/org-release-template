@@ -42,7 +42,7 @@ Para validar el cumplimiento, se medirán los siguientes indicadores:
 
 - **Workflows**: GitHub Actions para despliegue, testing y changelog.
 - **Changelog**: Usar `release-please` (ejemplo en este repo) o seguir modelo [KhaosResearch/EDAAnOWL](https://github.com/KhaosResearch/EDAAnOWL/blob/main/CHANGELOG.md).
-- **Licencia**: Apache 2.0 por defecto ([ejemplo](https://github.com/KhaosResearch/EDAAnOWL/blob/main/LICENSE)).
+- **Licencia**: Apache 2.0 por defecto (ver [LICENSE](../LICENSE)).
 
 ## 📄 Referencias
 

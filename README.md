@@ -51,7 +51,6 @@ Resumen:
    - `.release-please-manifest.json`
 
 2. **Copia la documentación base**:
-   - `CONTRIBUTING.md`
    - `docs/` (especialmente `ORGANIZATION_REQUIREMENTS.md`)
 
 3. **Crea tu `ARCHITECTURE.md`**:
