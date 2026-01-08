@@ -1,128 +1,72 @@
-# 🚀 Organization Release Template
+# 📘 Guía de Referencia de Proyectos (Template)
 
-Template repository con CI/CD completo, Conventional Commits y releases automáticas para la organización.
+Este repositorio sirve como **guía de referencia** estandarizada para proyectos de KHAOS / SEDIA.
 
-## ✨ Características
+## 📂 Estructura del Repositorio
 
-- 🔄 **CI/CD con GitHub Actions** - Lint, test automáticos
-- 📝 **Conventional Commits** - Formato estándar de commits
-- 🏷️ **Releases automáticas** - Con release-please de Google
-- 📋 **CHANGELOG automático** - Formato [Keep a Changelog](https://keepachangelog.com/)
-- 🔒 **Protección de ramas** - Guía incluida
+Esta es la estructura base recomendada para todo proyecto:
 
-## 📁 Estructura
-
-```
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml              # CI: lint, test
-│   │   ├── release-please.yml
-│   │   └── pr-check.yml
-│   ├── release-please-config.json
-│   └── PULL_REQUEST_TEMPLATE.md
-├── docs/                       # Documentación
-│   ├── BRANCH_PROTECTION.md
-│   ├── CONVENTIONAL_COMMITS.md
-│   └── RELEASE_WORKFLOW.md
-├── src/                        # Código fuente
-│   └── utils.py
-├── tests/                      # Tests
-├── .pre-commit-config.yaml     # Pre-commit hooks
-├── pyproject.toml              # Config del proyecto
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-└── README.md
+```mermaid
+graph TD
+    Repo[Raíz del Proyecto] --> Docs[docs/]
+    Repo --> Github[.github/]
+    Repo --> Source[src/ o app/]
+    Repo --> Tests[tests/]
+    Repo --> Config files...
+    
+    Github --> Workflows[workflows/release-please.yml]
+    Github --> Config[release-please-config.json]
+    
+    Docs --> Req[ORGANIZATION_REQUIREMENTS.md]
+    Docs --> Arch[ARCHITECTURE.md]
+    Docs --> Flow[RELEASE_WORKFLOW.md]
 ```
 
-## 🚦 Inicio Rápido
+> **Nota**: Las carpetas `src/`, `tests/` o `app/` son placeholders. Debes crear la estructura que mejor se adapte a tu lenguaje (Python, Java, JS, etc.).
 
-### 1. Usar este Template
+## 🎯 Objetivo
 
-Haz clic en **"Use this template"** → **"Create a new repository"**
+Proveer los estándares comunes a todos los desarrollos:
+1. **Gestión Automática de CHANGELOG**: Vía `release-please`.
+2. **Documentación Obligatoria**: Requerimientos organizacionales.
+3. **Flujo de Versionado**: SemVer y Conventional Commits.
 
-### 2. Clonar e Instalar
+> [!IMPORTANT]
+> El uso de **Conventional Commits** es CRÍTICO. Sin él, el CHANGELOG no se generará automáticamente y se perderá la trazabilidad. Ver [Guía de Commits](docs/CONVENTIONAL_COMMITS.md).
 
-```bash
-git clone https://github.com/tu-org/tu-repo.git
-cd tu-repo
+## 📋 Requisitos de la Organización
 
-# Crear entorno virtual
-python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# .venv\Scripts\activate   # Windows
+👉 **[Leer Requerimientos Organizacionales (KPIs)](docs/ORGANIZATION_REQUIREMENTS.md)**
 
-# Instalar dependencias
-pip install -e ".[dev]"
+Resumen:
+- **Licencia**: Apache 2.0.
+- **Despliegue**: `Apolo_Dev` antes de producción.
+- **Docs**: En inglés, con diagramas de arquitectura.
 
-# Instalar pre-commit hooks
-pre-commit install
-pre-commit install --hook-type commit-msg
-```
+## 🛠️ Pasos para usar este template
 
-### 3. Proteger la Rama Main
+1. **Copia la configuración de GitHub**:
+   - `.github/workflows/release-please.yml`
+   - `.github/release-please-config.json`
+   - `.release-please-manifest.json`
 
-Sigue la guía en [docs/BRANCH_PROTECTION.md](docs/BRANCH_PROTECTION.md)
+2. **Copia la documentación base**:
+   - `CONTRIBUTING.md`
+   - `docs/` (especialmente `ORGANIZATION_REQUIREMENTS.md`)
 
-### 4. ¡Empieza a Desarrollar!
+3. **Crea tu `ARCHITECTURE.md`**:
+   Usa la guía [ARCHITECTURE.md](docs/ARCHITECTURE.md) para documentar tu sistema con diagramas Mermaid.
 
-```bash
-# Crear branch
-git checkout -b feature/mi-feature
+4. **Desarrolla tu aplicación**:
+   Crea tus fuentes y tests según el lenguaje elegido.
 
-# Hacer cambios y commit (formato convencional)
-git commit -m "feat: add awesome feature"
+## 📄 Documentación Incluida
 
-# Crear PR
-git push origin feature/mi-feature
-```
+- [Requerimientos Organizacionales](docs/ORGANIZATION_REQUIREMENTS.md)
+- [Arquitectura (Ejemplo)](docs/ARCHITECTURE.md)
+- [Flujo de Release](docs/RELEASE_WORKFLOW.md)
+- [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)
 
-## 📖 Documentación
+## ⚖️ Licencia
 
-| Documento | Descripción |
-|-----------|-------------|
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Guía de contribución |
-| [Conventional Commits](docs/CONVENTIONAL_COMMITS.md) | Formato de commits |
-| [Branch Protection](docs/BRANCH_PROTECTION.md) | Cómo proteger main |
-| [Release Workflow](docs/RELEASE_WORKFLOW.md) | Flujo de releases |
-
-## 🔧 Comandos Útiles
-
-```bash
-# Lint
-ruff check src/
-
-# Formatear
-ruff format src/
-
-# Tests
-pytest tests/ -v
-
-# Pre-commit en todos los archivos
-pre-commit run --all-files
-```
-
-## 📋 Flujo de Trabajo
-
-```
-1. Crea branch desde main
-2. Haz commits con formato convencional
-3. Crea PR → CI corre automáticamente
-4. Obtén aprobación → Merge
-5. release-please crea Release PR
-6. Merge Release PR → Nueva versión publicada
-```
-
-## 🏷️ Versionado
-
-Usamos [SemVer](https://semver.org/) con formato [Keep a Changelog](https://keepachangelog.com/):
-
-| Tipo de Commit | Sección CHANGELOG | Versión |
-|----------------|-------------------|---------|
-| `feat:` | **Added** | MINOR (0.X.0) |
-| `fix:` | **Fixed** | PATCH (0.0.X) |
-| `refactor:`, `perf:` | **Changed** | - |
-| `BREAKING CHANGE` | **⚠ BREAKING** | MAJOR (X.0.0) |
-
-## 📄 Licencia
-
-[MIT](LICENSE)
+Apache License 2.0 - Ver [LICENSE](LICENSE)

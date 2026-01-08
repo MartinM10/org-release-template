@@ -1,175 +1,63 @@
-# Flujo de Releases Automáticas
+# Flujo de Releases y CI/CD
 
-Este documento explica cómo funcionan las releases automáticas con **release-please**.
+Esta guía explica conceptualmente cómo funcionan las releases automáticas y el CI/CD en la organización, utilizando **release-please** como motor de versionado.
 
-## Visión General
+## Diagrama de Flujo (Release)
 
-```
-Commits → main → Release Please → Release PR → Merge → GitHub Release + Tag
-```
-
-## Cómo Funciona
-
-### 1. Desarrollo Normal
-
-Los desarrolladores trabajan en sus ramas y crean PRs hacia `main`:
-
-```
-feature/login ─────► PR ─────► main
-```
-
-### 2. Merge a Main
-
-Cuando un PR se mergea a `main`, **release-please** analiza los commits.
-
-### 3. Release PR Automático
-
-Si hay commits relevantes (`feat`, `fix`, etc.), release-please crea o actualiza un **Release PR**:
-
-- 📝 Actualiza `CHANGELOG.md` automáticamente
-- 🔢 Calcula la nueva versión según SemVer
-- 📦 Actualiza `version` en `package.json`
-
-### 4. Merge del Release PR
-
-Cuando el equipo decide hacer una release, mergea el Release PR. Esto automáticamente:
-
-- 🏷️ Crea un tag de versión (ej: `v1.2.0`)
-- 📢 Crea un GitHub Release con notas
-- ✅ Marca los issues relacionados (si aplica)
-
-## Diagrama Detallado
-
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                       Desarrollo                                 │
-└────────────────────────────┬─────────────────────────────────────┘
-                             │
-    ┌────────────────────────┼────────────────────────┐
-    │                        │                        │
-    ▼                        ▼                        ▼
-┌─────────┐            ┌─────────┐            ┌─────────┐
-│ feat:   │            │ fix:    │            │ docs:   │
-│ login   │            │ bug #42 │            │ readme  │
-└────┬────┘            └────┬────┘            └────┬────┘
-     │                      │                      │
-     └──────────────────────┼──────────────────────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │  Merge a main │
-                    └───────┬───────┘
-                            │
-                            ▼
-              ┌─────────────────────────────┐
-              │     release-please.yml      │
-              │   analiza nuevos commits    │
-              └─────────────┬───────────────┘
-                            │
-              ┌─────────────┴───────────────┐
-              │                             │
-              ▼                             ▼
-    ┌─────────────────┐          ┌─────────────────┐
-    │ Commits con     │          │ Solo docs/ci/   │
-    │ feat/fix/perf   │          │ chore commits   │
-    └────────┬────────┘          └────────┬────────┘
-             │                            │
-             ▼                            ▼
-    ┌─────────────────┐          ┌─────────────────┐
-    │ Crear/Actualizar│          │ No se crea      │
-    │ Release PR      │          │ Release PR      │
-    └────────┬────────┘          └─────────────────┘
-             │
-             ▼
-    ┌─────────────────┐
-    │ CHANGELOG.md    │
-    │ actualizado     │
-    │ automáticamente │
-    └────────┬────────┘
-             │
-             ▼
-    ┌─────────────────┐
-    │ Equipo revisa   │
-    │ y aprueba       │
-    └────────┬────────┘
-             │
-             ▼
-    ┌─────────────────┐
-    │ Merge Release PR│
-    └────────┬────────┘
-             │
-             ▼
-    ┌─────────────────┐
-    │ GitHub Actions  │
-    │ crea:           │
-    │ • Tag v1.2.0    │
-    │ • GitHub Release│
-    └─────────────────┘
+```mermaid
+graph TD
+    User((Desarrollador)) -->|Code + Test| FeatBranch[Rama Feature/Fix]
+    FeatBranch -->|Pull Request| MainBranch[Rama Main]
+    
+    subgraph CI/CD Process
+        MainBranch -->|Merge| ReleasePlease{Release Please Action}
+        
+        ReleasePlease -->|¿Nuevos Commits?| Decision{Decision}
+        Decision -->|Sí: Feat/Fix| CreatePR[Crear Release PR]
+        Decision -->|No: Chore/Skip| Wait[Esperar]
+        
+        CreatePR -->|Actualizar| Changelog[CHANGELOG.md]
+        CreatePR -->|Bump| Version[Versión]
+    end
+    
+    subgraph Release
+        CreatePR -->|Merge PR| Publish[Publicar Release]
+        Publish -->|Tag v1.0.0| GitHub[GitHub Release]
+    end
 ```
 
-## Versionado Semántico (SemVer)
+## Arquitectura del Pipeline
 
-release-please calcula la versión automáticamente:
+El pipeline de CI/CD debe ser configurado por cada proyecto, pero generalmente sigue estos principios:
 
-| Tipo de Commit | Bump de Versión | Ejemplo |
-|----------------|-----------------|---------|
-| `fix:` | PATCH | 1.0.0 → 1.0.1 |
-| `feat:` | MINOR | 1.0.0 → 1.1.0 |
-| `BREAKING CHANGE` | MAJOR | 1.0.0 → 2.0.0 |
+1.  **Integración Continua (CI)**:
+    - Se ejecuta en cada Pull Request.
+    - Corre tests unitarios, linting y checks de seguridad.
+    - *Herramientas sugeridas*: GitHub Actions, Jenkins.
 
-## Ejemplo de CHANGELOG Generado
+2.  **Despliegue Continuo (CD) - Pre-producción**:
+    - Se ejecuta al mergear a ramas de desarrollo o staging.
+    - Despliega automáticamente a `Apolo_Dev`.
 
-```markdown
-## [1.2.0](https://github.com/org/repo/compare/v1.1.0...v1.2.0) (2026-01-08)
+3.  **Gestión de Versiones (Release Please)**:
+    - Analiza tus commits en `main`.
+    - Si encuentra commits con prefijos `feat:` o `fix:`, prepara una nueva versión.
+    - Mantiene el `CHANGELOG.md` limpio y ordenado.
 
-### Features
+## Historial de Cambios (CHANGELOG)
 
-* add user authentication ([#15](https://github.com/org/repo/issues/15))
-* implement dark mode support ([#18](https://github.com/org/repo/issues/18))
+Mantener un changelog es **obligatorio**. Puedes hacerlo de dos formas:
 
-### Bug Fixes
+### Opción A: Automática (Recomendada)
+Usando la configuración incluida en este template (`.github/workflows/release-please.yml`).
+Solo necesitas seguir [Conventional Commits](CONVENTIONAL_COMMITS.md).
 
-* resolve memory leak in dashboard ([#16](https://github.com/org/repo/issues/16))
-* fix login button not responding ([#17](https://github.com/org/repo/issues/17))
-```
+### Opción B: Manual
+Si decides no usar automatización, debes editar `CHANGELOG.md` manualmente.
 
-## FAQ
-
-### ¿Con qué frecuencia debo hacer releases?
-
-- **Recomendado**: Cuando el Release PR acumule cambios significativos
-- **Mínimo**: Al menos una vez por sprint/iteración
-- **Máximo**: No dejes acumular demasiados cambios
-
-### ¿Qué pasa si quiero saltarme un commit en la release?
-
-Usa el tipo `chore:` o añade `skip-release` en el mensaje:
-
-```bash
-chore: update dependencies [skip-release]
-```
-
-### ¿Puedo hacer releases manuales?
-
-Sí, pero no es recomendado. release-please maneja todo automáticamente.
-
-### ¿Cómo hago un hotfix?
-
-1. Crea un branch desde `main`
-2. Haz el fix con `fix: descripción`
-3. Crea PR a `main`
-4. Mergea el PR
-5. Mergea el Release PR que se genera
-
-## Archivos Importantes
-
-| Archivo | Propósito |
-|---------|-----------|
-| `.release-please-manifest.json` | Versión actual del proyecto |
-| `.github/release-please-config.json` | Configuración del release |
-| `CHANGELOG.md` | Historial de cambios (auto-generado) |
+> [!TIP]
+> Incluso si mantienes el changelog manualmente, **se recomienda fuertemente usar Conventional Commits**. Esto mantiene el historial limpio, facilita la trazabilidad y permite automatizar en el futuro si cambias de opinión.
 
 ## Referencias
 
-- [release-please GitHub](https://github.com/googleapis/release-please)
-- [Semantic Versioning](https://semver.org/)
+- [Documentación oficial de release-please](https://github.com/googleapis/release-please)

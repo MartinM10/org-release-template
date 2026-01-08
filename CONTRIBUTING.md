@@ -56,7 +56,11 @@ Escribe código limpio siguiendo las guías de estilo del proyecto (PEP 8, ruff)
 
 ### 3. Commits
 
-**Formato obligatorio: [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)**
+> [!IMPORTANT]
+> **El uso de [Conventional Commits](docs/CONVENTIONAL_COMMITS.md) es OBLIGATORIO.**
+> Es la base para mantener el CHANGELOG automatizado y la trazabilidad del proyecto. Intenta usarlo siempre, incluso si mantienes el changelog manualmente.
+
+**Formato obligatorio:**
 
 ```bash
 # Estructura
@@ -102,16 +106,16 @@ git commit -m "docs: update installation guide"
 
 ### 6. Merge
 
-Una vez aprobado y con CI verde, tu PR será mergeado.
+Una vez aprobado, tu PR será mergeado.
 
 ## ✅ Checklist del PR
 
 Antes de solicitar revisión:
 
-- [ ] Mi código sigue las guías de estilo (ruff pasa)
+- [ ] (Recomendado) Mi código sigue las guías de estilo
 - [ ] He añadido tests (si aplica)
-- [ ] Los tests pasan localmente (`pytest tests/`)
-- [ ] El lint pasa (`ruff check src/`)
+- [ ] (Recomendado) Los tests pasan localmente
+- [ ] (Recomendado) El lint pasa
 - [ ] He actualizado la documentación (si aplica)
 - [ ] El título del PR sigue Conventional Commits
 

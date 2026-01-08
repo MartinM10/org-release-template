@@ -30,11 +30,10 @@ Obliga a que todos los cambios pasen por un Pull Request.
 Asegura que el CI pase antes de poder mergear.
 
 - **Require branches to be up to date before merging**: Activado
-- Busca y añade estos status checks:
+- Busca y añade status checks, estos son algunos de ejemplo:
   - `Lint`
   - `Build`
   - `Test`
-  - `Validate PR Title`
 
 #### ✅ Require conversation resolution before merging
 Obliga a resolver todos los comentarios de revisión.
@@ -65,45 +64,21 @@ Después de configurar la protección:
 ## Diagrama de Flujo
 
 ```
-┌─────────────────┐
-│ Desarrollador   │
-│ crea branch     │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Hace cambios    │
-│ y commits       │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Crea Pull       │
-│ Request a main  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐     ❌ Falla
-│ GitHub Actions  │─────────┐
-│ (CI + PR Check) │         │
-└────────┬────────┘         │
-         │ ✅ Pasa          |
-         ▼                  │
-┌─────────────────┐         │
-│ Code Review     │◄────────┘
-│ (1+ aprobación) │
-└────────┬────────┘
-         │ ✅ Aprobado
-         ▼
-┌─────────────────┐
-│ Merge a main    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Release Please  │
-│ crea Release PR │
-└─────────────────┘
+```mermaid
+graph TD
+    Dev((Desarrollador)) -->|Crea Branch| Branch[Rama Feature]
+    Branch -->|Commits| PR[Pull Request]
+    
+    PR -->|Dispara| Checks{GitHub Actions}
+    Checks -->|❌ Falla| Fix[Corregir]
+    Fix --> PR
+    
+    Checks -->|✅ Pasa| Review{Code Review}
+    Review -->|❌ Requiere cambios| Fix
+    Review -->|✅ Aprobado| Merge[Merge a main]
+    
+    Merge -->|Release Please| Release[Release PR v2.0.0]
+```
 ```
 
 ## Próximos Pasos
