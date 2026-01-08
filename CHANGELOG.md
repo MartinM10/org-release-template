@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/MartinM10/org-release-template/compare/v1.0.0...v1.1.0) (2026-01-08)
+
+
+### Features
+
+* add math utility functions (multiply, divide, formatVersion) ([2d950a6](https://github.com/MartinM10/org-release-template/commit/2d950a6ffa2bf7d09da871ec3947e2db77999835))
+
 ## 1.0.0 (2026-01-08)
 
 
