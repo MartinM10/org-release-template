@@ -1,50 +1,68 @@
 # 📘 Guía de Referencia de Proyectos (Template)
 
-Este repositorio sirve como **guía de referencia** para la creación y gestión de proyectos dentro de la organización (KHAOS / SEDIA).
+Este repositorio sirve como **guía de referencia** estandarizada para proyectos de KHAOS / SEDIA.
 
-> **Nota**: Este no es un template rígido para clonar tal cual, sino una demostración de la estructura y prácticas recomendadas. Debes adaptar estas recomendaciones a tu proyecto específico.
+## 📂 Estructura del Repositorio
+
+Esta es la estructura base recomendada para todo proyecto:
+
+```mermaid
+graph TD
+    Repo[Raíz del Proyecto] --> Docs[docs/]
+    Repo --> Github[.github/]
+    Repo --> Source[src/ o app/]
+    Repo --> Tests[tests/]
+    Repo --> Config files...
+    
+    Github --> Workflows[workflows/release-please.yml]
+    Github --> Config[release-please-config.json]
+    
+    Docs --> Req[ORGANIZATION_REQUIREMENTS.md]
+    Docs --> Arch[ARCHITECTURE.md]
+    Docs --> Flow[RELEASE_WORKFLOW.md]
+```
+
+> **Nota**: Las carpetas `src/`, `tests/` o `app/` son placeholders. Debes crear la estructura que mejor se adapte a tu lenguaje (Python, Java, JS, etc.).
 
 ## 🎯 Objetivo
 
-Proveer un ejemplo funcional de:
-1. **Gestión automática de CHANGELOG** (vía `release-please`).
-2. **Estructura de repositorio** estándar.
-3. **Formato de commits** (Conventional Commits).
-4. **Documentación de requisitos** organizacionales.
+Proveer los estándares comunes a todos los desarrollos:
+1. **Gestión Automática de CHANGELOG**: Vía `release-please`.
+2. **Documentación Obligatoria**: Requerimientos organizacionales.
+3. **Flujo de Versionado**: SemVer y Conventional Commits.
 
-## 📋 Requisitos Obligatorios
+## 📋 Requisitos de la Organización
 
-Todos los proyectos deben cumplir con los criterios detallados en:
-👉 [**Requerimientos Organizacionales**](docs/ORGANIZATION_REQUIREMENTS.md)
+👉 **[Leer Requerimientos Organizacionales (KPIs)](docs/ORGANIZATION_REQUIREMENTS.md)**
 
 Resumen:
 - **Licencia**: Apache 2.0.
-- **Idioma**: Documentación en Inglés.
-- **Despliegue**: Pruebas obligatorias en `Apolo_Dev` antes de producción.
-- **KPIs**: Mínimo 100 commits, 5 tags, documentación extensa.
+- **Despliegue**: `Apolo_Dev` antes de producción.
+- **Docs**: En inglés, con diagramas de arquitectura.
 
-## 🛠️ Cómo Usar esta Guía
+## 🛠️ Pasos para usar este template
 
-1. **Estructura tu Proyecto**:
-   Inspírate en la organización de carpetas de este repo (`src`, `tests`, `docs`).
+1. **Copia la configuración de GitHub**:
+   - `.github/workflows/release-please.yml`
+   - `.github/release-please-config.json`
+   - `.release-please-manifest.json`
 
-2. **Configura el Changelog Automático**:
-   Copia `.github/workflows/release-please.yml` y `.github/release-please-config.json` a tu repositorio.
-   Esto automatizará la creación del `CHANGELOG.md`.
+2. **Copia la documentación base**:
+   - `CONTRIBUTING.md`
+   - `docs/` (especialmente `ORGANIZATION_REQUIREMENTS.md`)
 
-3. **Adopta Conventional Commits**:
-   Utiliza prefijos (`feat:`, `fix:`) en tus commits para que el changelog se genere correctamente.
-   Ver [Guía de Commits](docs/CONVENTIONAL_COMMITS.md).
+3. **Crea tu `ARCHITECTURE.md`**:
+   Usa la [plantilla de arquitectura](docs/ARCHITECTURE_TEMPLATE.md) para documentar tu sistema con diagramas Mermaid.
 
-4. **Documenta tu Arquitectura**:
-   Asegúrate de incluir documentación técnica detallada como se exige en los requisitos.
+4. **Desarrolla tu aplicación**:
+   Crea tus fuentes y tests según el lenguaje elegido.
 
 ## 📄 Documentación Incluida
 
-- [Requerimientos de la Organización](docs/ORGANIZATION_REQUIREMENTS.md)
-- [Guía de Conventional Commits](docs/CONVENTIONAL_COMMITS.md)
-- [Flujo de Release (release-please)](docs/RELEASE_WORKFLOW.md)
-- [Protección de Ramas](docs/BRANCH_PROTECTION.md)
+- [Requerimientos Organizacionales](docs/ORGANIZATION_REQUIREMENTS.md)
+- [Plantilla de Arquitectura](docs/ARCHITECTURE_TEMPLATE.md)
+- [Flujo de Release](docs/RELEASE_WORKFLOW.md)
+- [Conventional Commits](docs/CONVENTIONAL_COMMITS.md)
 
 ## ⚖️ Licencia
 
