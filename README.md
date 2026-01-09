@@ -4,25 +4,32 @@ Este repositorio sirve como **guía de referencia** estandarizada para proyectos
 
 ## 📂 Estructura del Repositorio
 
-Esta es la estructura base recomendada para todo proyecto:
+Esta guía propone una **estructura flexible** para el código fuente, adaptada al lenguaje o framework que utilices.
 
-```mermaid
-graph TD
-    Repo[Raíz del Proyecto] --> Docs[docs/]
-    Repo --> Github[.github/]
-    Repo --> Source[src/ o app/]
-    Repo --> Tests[tests/]
-    Repo --> Config-files
-    
-    Github --> Workflows[workflows/release-please.yml]
-    Github --> Config[release-please-config.json]
-    
-    Docs --> Req[ORGANIZATION_REQUIREMENTS.md]
-    Docs --> Arch[ARCHITECTURE.md]
-    Docs --> Flow[RELEASE_WORKFLOW.md]
+Sin embargo, hay ciertos archivos estándar (como la configuración de release) que deben mantenerse.
+
+A continuación se muestra un ejemplo de estructura mínima esperada:
+
+```text
+.
+├── .github/
+│   ├── workflows/
+│   │   └── release-please.yml         # 🤖 Workflow de Release (Requerido)
+│   └── release-please-config.json     # ⚙️ Configuración de Release (Requerido)
+├── docs/
+│   ├── assets/                # 📸 Imágenes, logos, diagramas
+│   └── ARCHITECTURE.md        # 🏛️ Documentación de Arquitectura (Requerido)
+├── src/                               # 📦 Tu código fuente (Nombre carpeta libre)
+├── tests/                             # 🧪 Tus tests (Nombre carpeta libre)
+├── .gitignore
+├── CHANGELOG.md                       # 📝 Generado automáticamente
+└── README.md
 ```
 
-> **Nota**: Las carpetas `src/`, `tests/` o `app/` son placeholders. Debes crear la estructura que mejor se adapte a tu lenguaje (Python, Java, JS, etc.).
+> [!NOTE]
+> Los archivos que ves en la carpeta `docs/` de este repositorio (ej: `ORGANIZATION_REQUIREMENTS.md`, `BRANCH_PROTECTION.md`, `RELEASE_WORKFLOW.md`) son **documentación de esta guía**.
+>
+> **NO** es necesario copiarlos a tu repositorio. En tu proyecto, `docs/` debe contener documentación específica de tu software (como la Arquitectura).
 
 ## 🎯 Objetivo
 
@@ -50,13 +57,11 @@ Resumen:
    - `.github/release-please-config.json`
    - `.release-please-manifest.json`
 
-2. **Copia la documentación base**:
-   - `docs/` (especialmente `ORGANIZATION_REQUIREMENTS.md`)
+2. **Crea tu documentación**:
+   - Crea la carpeta `docs/`.
+   - Crea `docs/ARCHITECTURE.md` siguiendo el [ejemplo incluido](docs/ARCHITECTURE.md).
 
-3. **Crea tu `ARCHITECTURE.md`**:
-   Usa la guía [ARCHITECTURE.md](docs/ARCHITECTURE.md) para documentar tu sistema con diagramas Mermaid.
-
-4. **Desarrolla tu aplicación**:
+3. **Desarrolla tu aplicación**:
    Crea tus fuentes y tests según el lenguaje elegido.
 
 ## 📄 Documentación Incluida

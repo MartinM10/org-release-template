@@ -27,9 +27,9 @@ Para validar el cumplimiento, se medirán los siguientes indicadores:
 ## 🚀 Estrategia de Despliegue y Pruebas
 
 ### Entorno de Desarrollo (Apolo_Dev)
-- **IP**: `192.168.219.6`
+- **IP**: `192.168....` es decir, una IP privada, preguntar a los compañeros, ya que esta IP puede variar.
 - **Uso**: Pruebas de integración obligatorias antes de producción.
-- **Requisito**: TODA implementación debe probarse aquí primero.
+- **Requisito**: **TODA** implementación debe probarse aquí primero.
 - **Red**: Las aplicaciones deben tener **IP privada**. No pueden apuntar a IPs públicas (ej: `150...`).
 
 ### Flujo de Aprobación
